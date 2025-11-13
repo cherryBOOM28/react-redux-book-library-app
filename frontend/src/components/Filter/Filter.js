@@ -1,9 +1,38 @@
+import { useDispatch, useSelector } from 'react-redux'
 import './Filter.css'
+import {
+  setTitleFilter,
+  selectTitleFilter,
+  resetFilters,
+} from '../../redux/slices/filterSlice'
 
 const Filter = () => {
+  const dispatch = useDispatch()
+  const titleFilter = useSelector(selectTitleFilter)
+  // filter => name из filterSlice
+  // то есть достается title из filter(filterSlice)
+
+  const handleTitleFilterChange = (e) => {
+    dispatch(setTitleFilter(e.target.value))
+  }
+
+  const handleResetFilters = () => {
+    dispatch(resetFilters())
+  }
+
   return (
     <div className="app-block filter">
-      <h2>Filters</h2>
+      <div className="filter-row">
+        <div className="filter-group">
+          <input
+            onChange={handleTitleFilterChange}
+            type="text"
+            value={titleFilter} // значение в поле ввода всегда синхронизировано с состоянием в Redux
+            placeholder="Filter by title..."
+          />
+        </div>
+        <button type='button' onClick={handleResetFilters}>Reset filters</button>
+      </div>
     </div>
   )
 }
