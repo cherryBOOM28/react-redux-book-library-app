@@ -6,12 +6,16 @@ import {
   setAuthorFilter,
   selectAuthorFilter,
   resetFilters,
+  setOnlyFavoriteFilter,
+  selectOnlyFavoriteFilter
 } from '../../redux/slices/filterSlice'
 
 const Filter = () => {
   const dispatch = useDispatch()
   const titleFilter = useSelector(selectTitleFilter)
   const authorFilter = useSelector(selectAuthorFilter)
+  const onlyFavoriteFilter = useSelector(selectOnlyFavoriteFilter)
+
 
   // filter => name из filterSlice
   // то есть достается title из filter(filterSlice)
@@ -27,6 +31,10 @@ const Filter = () => {
   const handleResetFilters = () => {
     dispatch(resetFilters())
   }
+
+  const handleOnlyFavoriteFilterChange = () => {
+    dispatch(setOnlyFavoriteFilter())
+  } 
 
   return (
     <div className="app-block filter">
@@ -46,6 +54,12 @@ const Filter = () => {
             value={authorFilter}
             placeholder="Filter by author..."
           />
+        </div>
+        <div className="filter-group">
+          <label>
+            <input type='checkbox' checked={onlyFavoriteFilter} onChange={handleOnlyFavoriteFilterChange} />
+            Only Favorite
+          </label>
         </div>
         <button type="button" onClick={handleResetFilters}>
           Reset filters
