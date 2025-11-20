@@ -1,4 +1,8 @@
-import { deleteBook, selectBooks, toggleFavorite } from '../../redux/slices/booksSlice'
+import {
+  deleteBook,
+  selectBooks,
+  toggleFavorite,
+} from '../../redux/slices/booksSlice'
 import './BookList.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { BsBookmarkStarFill, BsBookmarkStar } from 'react-icons/bs'
@@ -67,6 +71,7 @@ const BookList = () => {
                 <div className="book-info">
                   {++i}. {highlightMatch(book.title, titleFilter)} by{' '}
                   <strong>{highlightMatch(book.author, authorFilter)}</strong>
+                  ({book.source})
                 </div>
                 <div className="book-actions">
                   <span
